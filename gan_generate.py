@@ -42,7 +42,7 @@ def vector_to_sequence(vector):
 
 all_data = []
 for i in range(len(all_sequences)):
-    all_data.append(sequence_to_vector(all_sequences[i]))  # (8230,1)
+    all_data.append(sequence_to_vector(all_sequences[i]))  
 
 class Generator(nn.Module):
 
@@ -58,8 +58,6 @@ class Generator(nn.Module):
         self.gru = nn.GRU(embedding_dim, hidden_dim)
         self.gru2out = nn.Linear(hidden_dim, vocab_size)
 
-        # initialise oracle network with N(0,1)
-        # otherwise variance of initialisation is very small => high NLL for data sampled from the same model
         if oracle_init:
             for p in self.parameters():
                 nn.init.normal_(p, 0, 1)
@@ -279,8 +277,7 @@ def train_discriminator(discriminator, dis_opt, real_data_samples, generator, or
             total_loss = 0
             total_acc = 0
 
-            for i in range(0, 2 * POS_NEG_SAMPLES, BATCH_SIZE): #2 * POS_NEG_SAMPLES because both pos 
-                                                                #and neg samples included in dis_inp
+            for i in range(0, 2 * POS_NEG_SAMPLES, BATCH_SIZE):                                       
                 inp, target = dis_inp[i:i + BATCH_SIZE], dis_target[i:i + BATCH_SIZE]
                 dis_opt.zero_grad()
                 out = discriminator.batchClassify(inp)
