@@ -158,14 +158,6 @@ class Discriminator(nn.Module):
 		return out
 
 	def batchClassify(self, inp):
-		"""
-		Classifies a batch of sequences.
-		Inputs: inp
-			- inp: batch_size x seq_len
-		Returns: out
-			- out: batch_size ([0,1] score)
-		"""
-
 		h = self.init_hidden(inp.size()[0])
 		out = self.forward(inp, h)
 		return out.view(-1)
@@ -284,8 +276,8 @@ def train_discriminator(discriminator, dis_opt, real_data_samples, generator, or
 			total_loss = 0
 			total_acc = 0
 
-			for i in range(0, 2 * POS_NEG_SAMPLES, BATCH_SIZE): #2 * POS_NEG_SAMPLES because both pos
-																#and neg samples included in dis_inp
+			for i in range(0, 2 * POS_NEG_SAMPLES, BATCH_SIZE):
+																
 				inp, target = dis_inp[i:i + BATCH_SIZE], dis_target[i:i + BATCH_SIZE]
 				dis_opt.zero_grad()
 				out = discriminator.batchClassify(inp)
@@ -311,12 +303,11 @@ def train_discriminator(discriminator, dis_opt, real_data_samples, generator, or
 
 			loss_d.append(total_loss)
 
-VOCAB_SIZE = 26 #Starting Letter + 20 AA + Padding
-MAX_SEQ_LEN = 18 #2000 kDa / 110 kDa = 18
+VOCAB_SIZE = 26 
+MAX_SEQ_LEN = 18 
 START_LETTER = 0 
-POS_NEG_SAMPLES = len(all_data) #Size of AVPDb dataset
+POS_NEG_SAMPLES = len(all_data) 
 torch.manual_seed(11)
-
 BATCH_SIZE = 16
 ADV_TRAIN_EPOCHS = 100
 MLE_TRAIN_EPOCHS = 50
