@@ -12,7 +12,6 @@ import tensorflow as tf
 from tensorflow import keras
 from tensorflow.keras import layers
 
-# ====================================函数================================
 def pad_to_length(input_data: list, pad_token, max_length: int) -> list:
     assert len(input_data) <= max_length
     result = input_data[:]
