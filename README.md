@@ -1,19 +1,19 @@
 # Antimicrobial-Peptide-Generation
 ## 1. Peptide Generation
 ## Training
-```python
+```shell
 python gan.py
 ```
 ## Generation
-```python
+```shell
 python gan_generation.py
 ```
 ## 2. Peptide Classification
 ## Training
-```python
+```shell
 python AMP_Classification.py
 ```
 ## Inference
-```python
+```pshell
 python AMP_Classification_Prediction.py 
 ```
