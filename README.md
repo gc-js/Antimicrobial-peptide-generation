@@ -1,4 +1,8 @@
 # Antimicrobial-Peptide-Generation
+
+## Huggingface
+We also host a trained version of the model on the [HuggingFace space](https://huggingface.co/spaces/oucgc1996/Antimicrobial-peptide-generation/tree/main), so you can start your inference using just your browser.
+
 ## 1. Peptide Generation
 ## Training
 ```shell
@@ -17,4 +21,3 @@ python AMP_Classification.py
 ```pshell
 python AMP_Classification_Prediction.py 
 ```
-We also host a trained version of the model on the [HuggingFace space](https://huggingface.co/spaces/oucgc1996/Antimicrobial-peptide-generation/tree/main), so you can start your inference using just your browser.
