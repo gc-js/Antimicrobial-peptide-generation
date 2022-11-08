@@ -1,4 +1,4 @@
-# Antimicrobial-peptide-generation
+# Antimicrobial-Peptide-Generation
 ## 1. Peptide Generation
 ## Training
 ```python
