@@ -344,7 +344,7 @@ def main():
 
         print("Train...")
         model.fit(
-            {"Transformer_input": train2, "gru_input": train1},
+            {"Transformer_input": train2, "lstm_input": train1},
             train_label,
             epochs=epochs,
             batch_size=batch_size,
