@@ -11,8 +11,8 @@ set_seed(4)
 device = "cuda:0"
 model_checkpoint = "facebook/esm2_t6_8M_UR50D"
 
-df_train = pd.read_csv('huggingface/AMP_training_final.csv')
-df_val = pd.read_csv('huggingface/AMP_val_final.csv')
+df_train = pd.read_csv('./training_data.csv')
+df_val = pd.read_csv('./val_data.csv')
 
 train_sequences = df_train["Seq"].tolist()
 train_labels = df_train["Label"].tolist()
