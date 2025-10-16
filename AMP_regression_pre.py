@@ -1,6 +1,3 @@
-# -*- coding: utf-8 -*-
-# @Time    : 2022/3/14 4:08
-# @Author  : Cheng Ge
 from tensorflow.keras.models import Model
 import warnings
 warnings.filterwarnings('ignore')
@@ -15,8 +12,8 @@ from codes.ZSCALE import *
 import numpy as np
 from keras.models import Sequential
 from keras.layers import LSTM, Dense, Dropout, Activation
-# ===================================================特征提取================================================================
-file_path = r"D:/y3/hlh/test_new.fasta"
+
+file_path = r"test.fasta"
 f = open(file_path, 'r', encoding='utf-8')
 label = []
 
@@ -29,7 +26,6 @@ def pad_to_length(input_data: list, pad_token, max_length: int) -> list:
         result = input_data
     return result
 
-# 获取序列特征
 fasta_list = np.array(f.readlines())
 aa_feature_list = []
 all_feature = []
@@ -38,16 +34,14 @@ sequence = []
 for flag in range(0, len(fasta_list)):
     if "," in fasta_list[flag].strip('\n').strip():
         seq = fasta_list[flag].strip('\n').strip()
-        print(f"第{flag}个数据错误,序列{seq}包含,")
     elif "X" in fasta_list[flag].strip('\n').strip():
         seq = fasta_list[flag].strip('\n').strip()
-        print(f"第{flag}个数据错误,序列{seq}包含X")
     else:
         seq = fasta_list[flag].strip('\n').strip()
 
         sequence.append(seq)
         fasta_str = [[">1", fasta_list[flag].strip('\n').strip()]]
-        if len(fasta_str[0][1]) > len_seq_max:  # acp240最低23，acp740最低33
+        if len(fasta_str[0][1]) > len_seq_max:
             fasta_str[0][1] = fasta_str[0][1][0:len_seq_max]
         else:
             fasta_str[0][1] = pad_to_length(fasta_str[0][1], "-", len_seq_max)
@@ -78,7 +72,7 @@ for flag in range(0, len(fasta_list)):
         aa_fea_matrx = np.hstack([np.array(bin_feature), np.array(blo_feature), np.array(zsl_feature)])
         aa_feature_list.append(aa_fea_matrx)
 aa_feature_list = np.array(aa_feature_list)
-#  =======================================Dataset=============================================
+
 timesteps = 1
 data_dim = len_seq_max*45
 x = aa_feature_list
@@ -91,7 +85,7 @@ model.add(Dropout(0.6, name='dropout'))
 model.add(Dense(1, Activation('linear')))
 model.summary()
 
-model.load_weights(filepath=r"D:/中国海洋大学课题/抗菌肽生成/代码/活性值预测模型/hlh_v1.h5", by_name=False, skip_mismatch=False, options=None)
+model.load_weights(filepath=r"best_model.h5", by_name=False, skip_mismatch=False, options=None)
 
 proba = model.predict(x_train)
 k=-1
