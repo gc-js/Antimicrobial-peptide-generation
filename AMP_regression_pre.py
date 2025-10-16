@@ -13,7 +13,7 @@ import numpy as np
 from keras.models import Sequential
 from keras.layers import LSTM, Dense, Dropout, Activation
 
-file_path = r"test.fasta"
+file_path = "test.fasta"
 f = open(file_path, 'r', encoding='utf-8')
 label = []
 
