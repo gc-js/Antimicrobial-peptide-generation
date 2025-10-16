@@ -21,3 +21,12 @@ python AMP_Classification.py
 ```pshell
 python AMP_Classification_Prediction.py 
 ```
+## 3. Peptide Regression
+## Training
+```shell
+python AMP_Regression.py
+```
+## Inference
+```pshell
+python AMP_Regression_Prediction.py 
+```
